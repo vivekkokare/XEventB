@@ -94,7 +94,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
       XMachineValidator.this.warning(message, source, feature, code, issueData);
     }
   };
-
+  
   @Check
   public void checkMachineName(final Machine mch) {
     final Resource res = mch.eResource();
@@ -106,7 +106,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
       this.error("Machine name should be the same as the file name", null);
     }
   }
-
+  
   /**
    * check the prefix of the event must be one of the prefixes of the included machine
    * that contains the synchronised event
@@ -137,7 +137,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
       this.error("Event prefix must be one of the included machine prefixes", null);
     }
   }
-
+  
   /**
    * Add Prefixing warning if more than one machine is inlcuded
    * the  reason is to avoid event synchronisation problems if machines have the same event name e.g. INITIALISATION
@@ -162,7 +162,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
       }
     }
   }
-
+  
   /**
    * Check the prefix of the event must be one of the prefixes of the included machine
    * that contains the synchronised event
@@ -189,14 +189,14 @@ public class XMachineValidator extends AbstractXMachineValidator {
       }
     }
   }
-
+  
   /**
    * Empty array of markers.
    * 
    * @since 2.0
    */
   private final IMarker[] NO_MARKER = {};
-
+  
   /**
    * Utility method to find all Rodin markers associated with a machine root.
    * @param mchRoot
@@ -217,7 +217,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
     }
     return resource.findMarkers(RodinMarkerUtil.RODIN_PROBLEM_MARKER, true, IResource.DEPTH_INFINITE);
   }
-
+  
   /**
    * Utility method to get the EStructuralFeature corresponding to an
    * attribute of an input EObject (of some Event-B elements), given the
@@ -313,7 +313,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
     }
     return null;
   }
-
+  
   /**
    * Utility method to create an issue associated with an EObject from a Rodin
    * marker associated with the Rodin element corresponding to the EObject.
@@ -367,7 +367,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   /**
    * Utility method to get the machine of an EObject. Return the Machine
    * parent of the input element. Return <code>null</code> if there is no
@@ -384,7 +384,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
     }
     return null;
   }
-
+  
   /**
    * An "expensive" check to convert the Rodin Markers of an input Rodin
    * machine into issues for the corresponding XMachine.
@@ -414,7 +414,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   /**
    * A "Normal" check to clear the markers associated with the Rodin machine.
    * This is important as the markers generated as the consequence of
@@ -440,7 +440,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   /**
    * Method to find the EObject in a machine corresponding to the input Rodin
    * object. This is the "identified" attribute such as "identifier", "label".
@@ -486,7 +486,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   private Variable findVariable(final Machine mch, final String name) {
     final EList<Variable> variables = mch.getVariables();
     for (final Variable variable : variables) {
@@ -498,7 +498,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
     }
     return null;
   }
-
+  
   private Invariant findInvariant(final Machine mch, final String label) {
     final EList<Invariant> invariants = mch.getInvariants();
     for (final Invariant invariant : invariants) {
@@ -510,7 +510,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
     }
     return null;
   }
-
+  
   private Event findEvent(final Machine mch, final String label) {
     final EList<Event> events = mch.getEvents();
     for (final Event event : events) {
@@ -522,7 +522,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
     }
     return null;
   }
-
+  
   private Parameter findParameter(final Machine mch, final String eventLabel, final String parameterName) {
     final Event event = this.findEvent(mch, eventLabel);
     if ((event == null)) {
@@ -538,7 +538,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
     }
     return null;
   }
-
+  
   private Guard findGuard(final Machine mch, final String eventLabel, final String guardLabel) {
     final Event event = this.findEvent(mch, eventLabel);
     if ((event == null)) {
@@ -554,7 +554,7 @@ public class XMachineValidator extends AbstractXMachineValidator {
     }
     return null;
   }
-
+  
   private Action findAction(final Machine mch, final String eventLabel, final String actionLabel) {
     final Event event = this.findEvent(mch, eventLabel);
     if ((event == null)) {
@@ -570,27 +570,27 @@ public class XMachineValidator extends AbstractXMachineValidator {
     }
     return null;
   }
-
+  
   @Check
   public void checkUntranslatedFormulae(final EventBPredicate predicate) {
     this.validator.validatePredicate(predicate);
   }
-
+  
   @Check
   public void checkUntranslatedFormulae(final EventBExpression expression) {
     this.validator.validateExpression(expression);
   }
-
+  
   @Check
   public void checkUntranslatedFormulae(final EventBAction action) {
     this.validator.validateAssignment(action);
   }
-
+  
   @Check
   public void checkUntranslatedFormulae(final Value value) {
     this.validator.validateValue(value);
   }
-
+  
   @Check
   public void checkUntranslatedFormulae(final Type type) {
     this.validator.validateType(type);

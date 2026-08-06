@@ -43,7 +43,7 @@ public class AssertMachineExtensions {
   public EClass registerMachineEPackage() {
     return MachinePackage.eINSTANCE.eClass();
   }
-
+  
   /**
    * This method asserts the name and the comments of the input machine against
    * the expected name and comments. An {@link AssertionError} is thrown if
@@ -65,7 +65,7 @@ public class AssertMachineExtensions {
     Assert.assertEquals("Incorrect context\'s name", expectedName, mch.getName());
     Assert.assertEquals("Incorrect context\'s comments", expectedComments, mch.getComment());
   }
-
+  
   /**
    * This method asserts the actual event against
    * the expected content of event. An {@link AssertionError} is thrown if

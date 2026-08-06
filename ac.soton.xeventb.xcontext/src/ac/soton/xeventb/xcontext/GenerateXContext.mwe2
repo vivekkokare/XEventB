@@ -58,6 +58,7 @@ Workflow {
 			fileExtensions = "bucx"
 			referencedResource = "platform:/resource/org.eventb.emf.core/model/eventbcore.genmodel"
 			referencedResource = "platform:/resource/ac.soton.eventb.emf.record/model/record.genmodel"
+			referencedResource = "platform:/resource/ac.soton.eventb.emf.agent/model/agent.genmodel"
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 
 			//			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
