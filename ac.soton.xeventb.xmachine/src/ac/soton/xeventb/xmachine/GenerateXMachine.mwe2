@@ -196,6 +196,7 @@ Workflow {
 			//referencedResource = "http://soton.ac.uk/models/eventb/inclusion/2017"
 			referencedResource = "platform:/resource/org.eventb.emf.core/model/eventbcore.genmodel"
 			referencedResource = "platform:/resource/ac.soton.eventb.emf.record/model/record.genmodel"
+			referencedResource = "platform:/resource/ac.soton.eventb.emf.agent/model/agent.genmodel"
 			
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 

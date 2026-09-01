@@ -44,6 +44,8 @@ import org.eventb.emf.core.machine.Machine
 import org.eventb.emf.core.machine.MachinePackage
 import org.eventb.emf.persistence.EMFRodinDB
 import org.rodinp.core.IInternalElement
+import ac.soton.eventb.emf.agent.AgentTypedVariable
+import ac.soton.eventb.emf.agent.AgentPackage
 
 /**
  * <p>
@@ -192,6 +194,12 @@ class XMachineScopeProvider extends AbstractDeclarativeScopeProvider {
 			// EMFUtils to construct URI from file name and project.
 			// for each file, load the resource and get the first content.
 		}
+		
+//		if (context instanceof AgentTypedVariable &&
+//			reference == AgentPackage.Literals.AGENT_TYPED_VARIABLE__AGENTS
+//		) {
+//			
+//		}
        return super.getScope(context, reference);
 	}
 	

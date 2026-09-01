@@ -1,13 +1,13 @@
 /*******************************************************************************
  *  Copyright (c) 2016,2020 University of Southampton.
- *
+ * 
  *  This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License 2.0
  *  which accompanies this distribution, and is available at
  *  https://www.eclipse.org/legal/epl-2.0/
- *
+ * 
  *  SPDX-License-Identifier: EPL-2.0
- *
+ * 
  *  Contributors:
  *    University of Southampton - initial API and implementation 
  *******************************************************************************/
@@ -15,11 +15,17 @@
 package ac.soton.xeventb.xmachine.generator
 
 import ac.soton.emf.translator.TranslatorFactory
+import ac.soton.eventb.emf.agent.Agent
+import ac.soton.eventb.emf.agent.AgentTypedVariable
 import ac.soton.eventb.emf.containment.Containment
 import ac.soton.eventb.emf.core.^extension.coreextension.TypedVariable
 import ac.soton.xeventb.common.Utils
 import ac.soton.xeventb.xmachine.IContainmentGenerator
+import ch.ethz.eventb.utils.EventBUtils
+import java.util.ArrayList
 import java.util.Collection
+import java.util.HashSet
+import java.util.List
 import org.eclipse.core.commands.ExecutionException
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IWorkspaceRunnable
@@ -33,7 +39,9 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.emf.transaction.RecordingCommand
+import org.eclipse.emf.transaction.TransactionalEditingDomain
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
@@ -45,6 +53,7 @@ import org.eventb.emf.core.machine.Event
 import org.eventb.emf.core.machine.Machine
 import org.eventb.emf.core.machine.MachineFactory
 import org.eventb.emf.persistence.EMFRodinDB
+import org.eventb.emf.persistence.EventBEMFUtils
 import org.eventb.emf.persistence.PersistencePlugin
 import org.eventb.emf.persistence.SaveResourcesCommand
 import org.rodinp.core.RodinCore
@@ -53,7 +62,7 @@ import org.rodinp.core.RodinCore
  * <p>
  * Generating Rodin Machine from the XMachine.
  * </p>
- *
+ * 
  * @author htson - Initial implementation
  * @author Dana (0.0.6) - Implementation for machine inclusion (0.0.6)
  * @author asiehsalehi (2.0) - Implementation for record extension (2.0)
@@ -73,7 +82,7 @@ class XMachineGenerator extends AbstractGenerator {
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 
 		val mch = resource.contents.get(0) as Machine
-		
+
 		var uriString = resource.URI.toString
 		uriString = uriString.substring(0, uriString.lastIndexOf('bumx'))
 		uriString = uriString + "bum"
@@ -82,7 +91,7 @@ class XMachineGenerator extends AbstractGenerator {
 		// @htson: Set the source machine (from XText) as the content of the Rodin machine.
 		// @htsonImportant: Create the EMF RodinDB with the CURRENT resource set (2.0)
 		val emfRodinDB = new EMFRodinDB(resource.resourceSet)
-	    val editingDomain = emfRodinDB.editingDomain
+		val editingDomain = emfRodinDB.editingDomain
 		val rodinResource = emfRodinDB.getResource(uri)
 		// @htson: Use recording command for write transaction (2.0)
 		val command = new RecordingCommand(editingDomain, "Set Contents") {
@@ -92,7 +101,8 @@ class XMachineGenerator extends AbstractGenerator {
 				val rodinInternals = CoreFactory.eINSTANCE.createAnnotation()
 				rodinInternals.source = PersistencePlugin.SOURCE_RODIN_INTERNAL_ANNOTATION
 				val rodinInternalDetails = rodinInternals.getDetails()
-				rodinInternalDetails.put(CONFIGURATION,
+				rodinInternalDetails.put(
+					CONFIGURATION,
 					"org.eventb.core.fwd;ac.soton.xeventb.xmachine.base"
 				)
 				mch.getAnnotations().add(rodinInternals)
@@ -105,12 +115,16 @@ class XMachineGenerator extends AbstractGenerator {
 
 				// Ensure that the resource will be saved
 				rodinResource.modified = true;
+
+				// Generate the shadow models
+				generateShadowModels(emfRodinDB, uri, mch)
 			}
+
 		}
-		if (command.canExecute()){
+		if (command.canExecute()) {
 			editingDomain.getCommandStack().execute(command);
 		}
-		
+
 		if (!mch.extensions.empty) {
 			val factory = TranslatorFactory.getFactory() as TranslatorFactory
 
@@ -121,15 +135,14 @@ class XMachineGenerator extends AbstractGenerator {
 				val monitor = new NullProgressMonitor;
 				factory.translate(editingDomain, mch, commandId, monitor)
 			}
-			
+
 			// @Asieh: record (2.0)
 			var recordCommandId = "ac.soton.eventb.emf.record.generator.translateAllRecords"
-			
+
 			if (factory.canTranslate(recordCommandId, mch.eClass())) {
 				val monitor = new NullProgressMonitor;
 				factory.translate(editingDomain, mch, recordCommandId, monitor)
 			}
-
 
 		}
 
@@ -155,11 +168,9 @@ class XMachineGenerator extends AbstractGenerator {
 				getSchedulingRule(editingDomain.getResourceSet().getResources().toArray(emptyResource)), monitor);
 		}
 		monitor.done();
-			// ------------
-
+		// ------------
 //		editingDomain.resourceSet.resources.remove(rodinResource)
 //		TransactionUtil.disconnectFromEditingDomain(rodinResource)
-		
 		// @htson: Containment are generated by extension (2.0)
 		val registry = ContainmentRegistry.^default
 		for (ex : mch.extensions) {
@@ -167,13 +178,157 @@ class XMachineGenerator extends AbstractGenerator {
 			if (ex instanceof Containment) {
 				val ctmt = ex as Containment;
 				val owner = ctmt.getExtension();
-					
+
 				val Collection<IContainmentGenerator> generators = registry.getGenerators(owner)
 				for (generator : generators) {
 					generator.generate(mch, owner, editingDomain)
 				}
 			}
 		}
+	}
+
+	private def generateShadowModels(EMFRodinDB emfRodinDB, URI uri, Machine mch) {
+		// 1. Get the list of agents from the see contexts
+		val agents = getAgents(mch)
+
+		agents.add("others")
+
+		for (agent : agents) {
+			generateShadowModel(emfRodinDB, uri, mch, agent)
+		}
+	}
+
+	def private generateShadowModel(EMFRodinDB emfRodinDB, URI original_uri, Machine mch, String agent) {
+
+		var uriString = original_uri.toString // e.g., "m0.bum"
+		uriString = uriString.substring(0, uriString.lastIndexOf('.bum')) // should return "m0"
+		uriString = uriString + "_" + agent + ".bum" // "m0_A.bum"
+		val uri = URI.createURI(uriString)
+		val rodinResource = emfRodinDB.getResource(uri)
+		rodinResource.contents.clear()
+
+		val editingDomain = emfRodinDB.editingDomain
+
+		// A machine can only be put in a single resource, so need to copy this.
+		val copy = EcoreUtil.copy(mch)
+		rodinResource.contents.add(0, copy)
+
+		// Create a new shadow variables
+		val shadowVariable = "H_" + agent
+		EventBEMFUtils.createVariable(editingDomain, copy, shadowVariable)
+
+		// TODO work out the list of hidden variables for the "agent"
+		val hiddenVariables = getHiddenVariables(copy, agent)
+
+		// Generate the typing invariant for the shadow
+		val shadow = hiddenVariables.join(" ↦ ")
+		EventBEMFUtils.createInvariant(editingDomain, copy, "shadow", shadow + " ∈ " + shadowVariable, false)
+
+		// go through each event in "copy" and add an action the update to the shadow variable H
+		val orderedChildren = copy.eGet(
+			CorePackage.Literals.EVENT_BELEMENT__ORDERED_CHILDREN
+		) as EList<EventBElement>
+
+		for (child : orderedChildren) {
+			if (child instanceof Event) {
+				if (child.name.equals("INITIALISATION")) {
+					
+					// Exactly the same but without the existential quantifiers.
+				} else {
+					// Assume that there is a single non-deterministic action related to hidden variables labelled "shadow_update"
+					for (action : child.actions) {
+						if (action.name.equals("shadow_update")) {
+							// Assume that it is of the form v, h :∣ Q(v, h, v', h') 
+							var assignment = action.action
+							val String[] split_string = assignment.split(":∣")
+							var lhs = split_string.get(0)
+							var rhs = split_string.get(1)
+
+							lhs = lhs + ", " + shadowVariable
+							var String shadowUpdate = ""
+
+							val shadowHiddenVariable = new ArrayList<String>();
+							val shadowHiddenPrimedVariable = new ArrayList<String>();
+							for (hiddenVariable : hiddenVariables) {
+								shadowHiddenVariable.add("shadow_" + hiddenVariable)
+								shadowHiddenPrimedVariable.add("shadow_" + hiddenVariable + "'")
+							}
+
+							assignment = lhs + " :∣ " + rhs + " ∧ "
+
+							shadowUpdate += shadowHiddenPrimedVariable.toArray.join(" ↦ ")
+							shadowUpdate += " ∣ "
+							shadowUpdate += "∃ "
+							shadowUpdate += shadowHiddenVariable.toArray.join(", ")
+							shadowUpdate += " · "
+							shadowUpdate += shadowHiddenVariable.toArray.join(" ↦ ")
+							shadowUpdate += " ∈ "
+							shadowUpdate += shadowVariable
+							shadowUpdate += " ∧ "
+							for (hiddenVariable : hiddenVariables) {
+								rhs = rhs.replaceAll(hiddenVariable, "shadow_" + hiddenVariable)
+							}
+							shadowUpdate += rhs
+
+							assignment += shadowVariable + "' = {" + shadowUpdate + "}"
+							action.action = assignment
+						}
+					}
+				}
+			}
+		}
+	}
+
+//		val rodinInternals = CoreFactory.eINSTANCE.createAnnotation()
+//		rodinInternals.source = PersistencePlugin.SOURCE_RODIN_INTERNAL_ANNOTATION
+//		val rodinInternalDetails = rodinInternals.getDetails()
+//		rodinInternalDetails.put(CONFIGURATION,
+//				"org.eventb.core.fwd;ac.soton.xeventb.xmachine.base"
+//		)
+//		mch.getAnnotations().add(rodinInternals)
+	// Ensure that the resource will be saved
+	rodinResource.modified = true;
+
+}
+	
+	def shadowPrepend(String e) {
+		return "shadow_" + e
+	}
+	
+	def private getHiddenVariables(Machine mch, String agent) {
+		val orderedChildren = mch.eGet(
+			CorePackage.Literals.EVENT_BELEMENT__ORDERED_CHILDREN
+		) as EList<EventBElement>
+		
+		val hidden_variables = new ArrayList<String>()
+		
+		for (child : orderedChildren) {
+			if (child instanceof AgentTypedVariable) {
+				if (!child.agents.contains(agent)) {
+					hidden_variables.add(child.name)
+				}
+			}
+		}
+		return hidden_variables
+	}
+	
+	def private Collection<String> getAgents(Machine mch) {
+		
+		var orderedChildren = mch.eGet(
+			CorePackage.Literals.EVENT_BELEMENT__ORDERED_CHILDREN
+		) as EList<EventBElement>
+		
+		val agents = new HashSet<String>()
+		
+		var i = 0
+		while (i < orderedChildren.size) {
+			val child = orderedChildren.get(i)
+			if (child instanceof AgentTypedVariable) {
+				agents.addAll(child.agents)		
+			}
+			i++	
+		}
+		return agents
 	}
 
 	/*

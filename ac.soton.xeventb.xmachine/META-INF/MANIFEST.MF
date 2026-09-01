@@ -37,7 +37,8 @@ Require-Bundle: org.eclipse.xtext;bundle-version="[2.13.0,3.0.0)",
  org.rodinp.keyboard.core;bundle-version="[2.0.0,3.0.0)",
  ac.soton.eventb.emf.inclusion.edit;bundle-version="[1.0.2,2.0.0)",
  ac.soton.eventb.emf.record.edit;bundle-version="[1.0.0,2.0.0)",
- ac.soton.eventb.emf.containment.edit;bundle-version="[0.0.2,1.0.0)"
+ ac.soton.eventb.emf.containment.edit;bundle-version="[0.0.2,1.0.0)",
+ ac.soton.eventb.emf.agent;bundle-version="0.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: ac.soton.xeventb.xmachine,
  ac.soton.xeventb.xmachine.formatting2;x-internal:=true,
