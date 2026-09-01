@@ -3598,7 +3598,7 @@ rule__XIndividualVariable__Group__6__Impl
 :
 (
 	{ before(grammarAccess.getXIndividualVariableAccess().getGroup_6()); }
-	(rule__XIndividualVariable__Group_6__0)
+	(rule__XIndividualVariable__Group_6__0)?
 	{ after(grammarAccess.getXIndividualVariableAccess().getGroup_6()); }
 )
 ;

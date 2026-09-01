@@ -301,7 +301,7 @@ public class XMachineSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     XIndividualVariable returns AgentTypedVariable
 	 *
 	 * Constraint:
-	 *     (comment=STRING? name=ID type=XType? value=XFormula? agents+=ID+)
+	 *     (comment=STRING? name=ID type=XType? value=XFormula? agents+=ID*)
 	 * </pre>
 	 */
 	protected void sequence_XIndividualVariable(ISerializationContext context, AgentTypedVariable semanticObject) {

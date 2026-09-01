@@ -2557,12 +2557,10 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             case RULE_STRING:
                 {
                 switch ( input.LA(2) ) {
-                case 180:
-                case 181:
-                case 182:
-                case 197:
+                case 16:
+                case 17:
                     {
-                    alt2=7;
+                    alt2=2;
                     }
                     break;
                 case 196:
@@ -2586,10 +2584,12 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                     alt2=4;
                     }
                     break;
-                case 16:
-                case 17:
+                case 180:
+                case 181:
+                case 182:
+                case 197:
                     {
-                    alt2=2;
+                    alt2=7;
                     }
                     break;
                 default:
@@ -13555,29 +13555,40 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__XIndividualVariable__Group__6__Impl"
-    // InternalXMachine.g:3594:1: rule__XIndividualVariable__Group__6__Impl : ( ( rule__XIndividualVariable__Group_6__0 ) ) ;
+    // InternalXMachine.g:3594:1: rule__XIndividualVariable__Group__6__Impl : ( ( rule__XIndividualVariable__Group_6__0 )? ) ;
     public final void rule__XIndividualVariable__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalXMachine.g:3598:1: ( ( ( rule__XIndividualVariable__Group_6__0 ) ) )
-            // InternalXMachine.g:3599:1: ( ( rule__XIndividualVariable__Group_6__0 ) )
+            // InternalXMachine.g:3598:1: ( ( ( rule__XIndividualVariable__Group_6__0 )? ) )
+            // InternalXMachine.g:3599:1: ( ( rule__XIndividualVariable__Group_6__0 )? )
             {
-            // InternalXMachine.g:3599:1: ( ( rule__XIndividualVariable__Group_6__0 ) )
-            // InternalXMachine.g:3600:2: ( rule__XIndividualVariable__Group_6__0 )
+            // InternalXMachine.g:3599:1: ( ( rule__XIndividualVariable__Group_6__0 )? )
+            // InternalXMachine.g:3600:2: ( rule__XIndividualVariable__Group_6__0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIndividualVariableAccess().getGroup_6()); 
             }
-            // InternalXMachine.g:3601:2: ( rule__XIndividualVariable__Group_6__0 )
-            // InternalXMachine.g:3601:3: rule__XIndividualVariable__Group_6__0
-            {
-            pushFollow(FOLLOW_2);
-            rule__XIndividualVariable__Group_6__0();
+            // InternalXMachine.g:3601:2: ( rule__XIndividualVariable__Group_6__0 )?
+            int alt43=2;
+            int LA43_0 = input.LA(1);
 
-            state._fsp--;
-            if (state.failed) return ;
+            if ( (LA43_0==195) ) {
+                alt43=1;
+            }
+            switch (alt43) {
+                case 1 :
+                    // InternalXMachine.g:3601:3: rule__XIndividualVariable__Group_6__0
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__XIndividualVariable__Group_6__0();
+
+                    state._fsp--;
+                    if (state.failed) return ;
+
+                    }
+                    break;
 
             }
 
@@ -14086,17 +14097,17 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXIndividualVariableAccess().getAgentsAssignment_6_1()); 
             }
             // InternalXMachine.g:3769:3: ( rule__XIndividualVariable__AgentsAssignment_6_1 )*
-            loop43:
+            loop44:
             do {
-                int alt43=2;
-                int LA43_0 = input.LA(1);
+                int alt44=2;
+                int LA44_0 = input.LA(1);
 
-                if ( (LA43_0==RULE_ID) ) {
-                    alt43=1;
+                if ( (LA44_0==RULE_ID) ) {
+                    alt44=1;
                 }
 
 
-                switch (alt43) {
+                switch (alt44) {
             	case 1 :
             	    // InternalXMachine.g:3769:4: rule__XIndividualVariable__AgentsAssignment_6_1
             	    {
@@ -14110,7 +14121,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop43;
+            	    break loop44;
                 }
             } while (true);
 
@@ -14274,17 +14285,17 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXTypeAccess().getGroup_1()); 
             }
             // InternalXMachine.g:3824:2: ( rule__XType__Group_1__0 )*
-            loop44:
+            loop45:
             do {
-                int alt44=2;
-                int LA44_0 = input.LA(1);
+                int alt45=2;
+                int LA45_0 = input.LA(1);
 
-                if ( ((LA44_0>=18 && LA44_0<=41)) ) {
-                    alt44=1;
+                if ( ((LA45_0>=18 && LA45_0<=41)) ) {
+                    alt45=1;
                 }
 
 
-                switch (alt44) {
+                switch (alt45) {
             	case 1 :
             	    // InternalXMachine.g:3824:3: rule__XType__Group_1__0
             	    {
@@ -14298,7 +14309,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop44;
+            	    break loop45;
                 }
             } while (true);
 
@@ -15487,13 +15498,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXMultipleInvariantAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:4230:2: ( rule__XMultipleInvariant__CommentAssignment_1 )?
-            int alt45=2;
-            int LA45_0 = input.LA(1);
+            int alt46=2;
+            int LA46_0 = input.LA(1);
 
-            if ( (LA45_0==RULE_STRING) ) {
-                alt45=1;
+            if ( (LA46_0==RULE_STRING) ) {
+                alt46=1;
             }
-            switch (alt45) {
+            switch (alt46) {
                 case 1 :
                     // InternalXMachine.g:4230:3: rule__XMultipleInvariant__CommentAssignment_1
                     {
@@ -15839,13 +15850,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXIndividualInvariantAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:4338:2: ( rule__XIndividualInvariant__CommentAssignment_1 )?
-            int alt46=2;
-            int LA46_0 = input.LA(1);
+            int alt47=2;
+            int LA47_0 = input.LA(1);
 
-            if ( (LA46_0==RULE_STRING) ) {
-                alt46=1;
+            if ( (LA47_0==RULE_STRING) ) {
+                alt47=1;
             }
-            switch (alt46) {
+            switch (alt47) {
                 case 1 :
                     // InternalXMachine.g:4338:3: rule__XIndividualInvariant__CommentAssignment_1
                     {
@@ -16280,13 +16291,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXVariantAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:4473:2: ( rule__XVariant__CommentAssignment_1 )?
-            int alt47=2;
-            int LA47_0 = input.LA(1);
+            int alt48=2;
+            int LA48_0 = input.LA(1);
 
-            if ( (LA47_0==RULE_STRING) ) {
-                alt47=1;
+            if ( (LA48_0==RULE_STRING) ) {
+                alt48=1;
             }
-            switch (alt47) {
+            switch (alt48) {
                 case 1 :
                     // InternalXMachine.g:4473:3: rule__XVariant__CommentAssignment_1
                     {
@@ -16711,13 +16722,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:4608:2: ( rule__XEvent__CommentAssignment_1 )?
-            int alt48=2;
-            int LA48_0 = input.LA(1);
+            int alt49=2;
+            int LA49_0 = input.LA(1);
 
-            if ( (LA48_0==RULE_STRING) ) {
-                alt48=1;
+            if ( (LA49_0==RULE_STRING) ) {
+                alt49=1;
             }
-            switch (alt48) {
+            switch (alt49) {
                 case 1 :
                     // InternalXMachine.g:4608:3: rule__XEvent__CommentAssignment_1
                     {
@@ -16811,13 +16822,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getConvergenceAssignment_2()); 
             }
             // InternalXMachine.g:4635:2: ( rule__XEvent__ConvergenceAssignment_2 )?
-            int alt49=2;
-            int LA49_0 = input.LA(1);
+            int alt50=2;
+            int LA50_0 = input.LA(1);
 
-            if ( ((LA49_0>=180 && LA49_0<=182)) ) {
-                alt49=1;
+            if ( ((LA50_0>=180 && LA50_0<=182)) ) {
+                alt50=1;
             }
-            switch (alt49) {
+            switch (alt50) {
                 case 1 :
                     // InternalXMachine.g:4635:3: rule__XEvent__ConvergenceAssignment_2
                     {
@@ -17079,13 +17090,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getAlternatives_5()); 
             }
             // InternalXMachine.g:4716:2: ( rule__XEvent__Alternatives_5 )?
-            int alt50=2;
-            int LA50_0 = input.LA(1);
+            int alt51=2;
+            int LA51_0 = input.LA(1);
 
-            if ( (LA50_0==188||LA50_0==205) ) {
-                alt50=1;
+            if ( (LA51_0==188||LA51_0==205) ) {
+                alt51=1;
             }
-            switch (alt50) {
+            switch (alt51) {
                 case 1 :
                     // InternalXMachine.g:4716:3: rule__XEvent__Alternatives_5
                     {
@@ -17179,13 +17190,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getGroup_6()); 
             }
             // InternalXMachine.g:4743:2: ( rule__XEvent__Group_6__0 )?
-            int alt51=2;
-            int LA51_0 = input.LA(1);
+            int alt52=2;
+            int LA52_0 = input.LA(1);
 
-            if ( (LA51_0==198) ) {
-                alt51=1;
+            if ( (LA52_0==198) ) {
+                alt52=1;
             }
-            switch (alt51) {
+            switch (alt52) {
                 case 1 :
                     // InternalXMachine.g:4743:3: rule__XEvent__Group_6__0
                     {
@@ -17279,17 +17290,17 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getOrderedChildrenAssignment_7()); 
             }
             // InternalXMachine.g:4770:2: ( rule__XEvent__OrderedChildrenAssignment_7 )*
-            loop52:
+            loop53:
             do {
-                int alt52=2;
-                int LA52_0 = input.LA(1);
+                int alt53=2;
+                int LA53_0 = input.LA(1);
 
-                if ( (LA52_0==200) ) {
-                    alt52=1;
+                if ( (LA53_0==200) ) {
+                    alt53=1;
                 }
 
 
-                switch (alt52) {
+                switch (alt53) {
             	case 1 :
             	    // InternalXMachine.g:4770:3: rule__XEvent__OrderedChildrenAssignment_7
             	    {
@@ -17303,7 +17314,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop52;
+            	    break loop53;
                 }
             } while (true);
 
@@ -17386,13 +17397,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getGroup_8()); 
             }
             // InternalXMachine.g:4797:2: ( rule__XEvent__Group_8__0 )?
-            int alt53=2;
-            int LA53_0 = input.LA(1);
+            int alt54=2;
+            int LA54_0 = input.LA(1);
 
-            if ( ((LA53_0>=47 && LA53_0<=48)) ) {
-                alt53=1;
+            if ( ((LA54_0>=47 && LA54_0<=48)) ) {
+                alt54=1;
             }
-            switch (alt53) {
+            switch (alt54) {
                 case 1 :
                     // InternalXMachine.g:4797:3: rule__XEvent__Group_8__0
                     {
@@ -17486,13 +17497,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getGroup_9()); 
             }
             // InternalXMachine.g:4824:2: ( rule__XEvent__Group_9__0 )?
-            int alt54=2;
-            int LA54_0 = input.LA(1);
+            int alt55=2;
+            int LA55_0 = input.LA(1);
 
-            if ( ((LA54_0>=49 && LA54_0<=50)) ) {
-                alt54=1;
+            if ( ((LA55_0>=49 && LA55_0<=50)) ) {
+                alt55=1;
             }
-            switch (alt54) {
+            switch (alt55) {
                 case 1 :
                     // InternalXMachine.g:4824:3: rule__XEvent__Group_9__0
                     {
@@ -17586,13 +17597,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getGroup_10()); 
             }
             // InternalXMachine.g:4851:2: ( rule__XEvent__Group_10__0 )?
-            int alt55=2;
-            int LA55_0 = input.LA(1);
+            int alt56=2;
+            int LA56_0 = input.LA(1);
 
-            if ( (LA55_0==199) ) {
-                alt55=1;
+            if ( (LA56_0==199) ) {
+                alt56=1;
             }
-            switch (alt55) {
+            switch (alt56) {
                 case 1 :
                     // InternalXMachine.g:4851:3: rule__XEvent__Group_10__0
                     {
@@ -17860,17 +17871,17 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getRefinesAssignment_5_0_1()); 
             }
             // InternalXMachine.g:4937:3: ( rule__XEvent__RefinesAssignment_5_0_1 )*
-            loop56:
+            loop57:
             do {
-                int alt56=2;
-                int LA56_0 = input.LA(1);
+                int alt57=2;
+                int LA57_0 = input.LA(1);
 
-                if ( (LA56_0==RULE_ID) ) {
-                    alt56=1;
+                if ( (LA57_0==RULE_ID) ) {
+                    alt57=1;
                 }
 
 
-                switch (alt56) {
+                switch (alt57) {
             	case 1 :
             	    // InternalXMachine.g:4937:4: rule__XEvent__RefinesAssignment_5_0_1
             	    {
@@ -17884,7 +17895,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop56;
+            	    break loop57;
                 }
             } while (true);
 
@@ -18243,17 +18254,17 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getOrderedChildrenAssignment_6_1()); 
             }
             // InternalXMachine.g:5052:3: ( rule__XEvent__OrderedChildrenAssignment_6_1 )*
-            loop57:
+            loop58:
             do {
-                int alt57=2;
-                int LA57_0 = input.LA(1);
+                int alt58=2;
+                int LA58_0 = input.LA(1);
 
-                if ( (LA57_0==RULE_ID||LA57_0==RULE_STRING) ) {
-                    alt57=1;
+                if ( (LA58_0==RULE_ID||LA58_0==RULE_STRING) ) {
+                    alt58=1;
                 }
 
 
-                switch (alt57) {
+                switch (alt58) {
             	case 1 :
             	    // InternalXMachine.g:5052:4: rule__XEvent__OrderedChildrenAssignment_6_1
             	    {
@@ -18267,7 +18278,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop57;
+            	    break loop58;
                 }
             } while (true);
 
@@ -18463,17 +18474,17 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getOrderedChildrenAssignment_8_1()); 
             }
             // InternalXMachine.g:5113:3: ( rule__XEvent__OrderedChildrenAssignment_8_1 )*
-            loop58:
+            loop59:
             do {
-                int alt58=2;
-                int LA58_0 = input.LA(1);
+                int alt59=2;
+                int LA59_0 = input.LA(1);
 
-                if ( ((LA58_0>=RULE_STRING && LA58_0<=RULE_XLABEL)||LA58_0==204) ) {
-                    alt58=1;
+                if ( ((LA59_0>=RULE_STRING && LA59_0<=RULE_XLABEL)||LA59_0==204) ) {
+                    alt59=1;
                 }
 
 
-                switch (alt58) {
+                switch (alt59) {
             	case 1 :
             	    // InternalXMachine.g:5113:4: rule__XEvent__OrderedChildrenAssignment_8_1
             	    {
@@ -18487,7 +18498,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop58;
+            	    break loop59;
                 }
             } while (true);
 
@@ -18683,17 +18694,17 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getOrderedChildrenAssignment_9_1()); 
             }
             // InternalXMachine.g:5174:3: ( rule__XEvent__OrderedChildrenAssignment_9_1 )*
-            loop59:
+            loop60:
             do {
-                int alt59=2;
-                int LA59_0 = input.LA(1);
+                int alt60=2;
+                int LA60_0 = input.LA(1);
 
-                if ( ((LA59_0>=RULE_STRING && LA59_0<=RULE_XLABEL)) ) {
-                    alt59=1;
+                if ( ((LA60_0>=RULE_STRING && LA60_0<=RULE_XLABEL)) ) {
+                    alt60=1;
                 }
 
 
-                switch (alt59) {
+                switch (alt60) {
             	case 1 :
             	    // InternalXMachine.g:5174:4: rule__XEvent__OrderedChildrenAssignment_9_1
             	    {
@@ -18707,7 +18718,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop59;
+            	    break loop60;
                 }
             } while (true);
 
@@ -18893,17 +18904,17 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXEventAccess().getOrderedChildrenAssignment_10_1()); 
             }
             // InternalXMachine.g:5235:3: ( rule__XEvent__OrderedChildrenAssignment_10_1 )*
-            loop60:
+            loop61:
             do {
-                int alt60=2;
-                int LA60_0 = input.LA(1);
+                int alt61=2;
+                int LA61_0 = input.LA(1);
 
-                if ( ((LA60_0>=RULE_STRING && LA60_0<=RULE_XLABEL)) ) {
-                    alt60=1;
+                if ( ((LA61_0>=RULE_STRING && LA61_0<=RULE_XLABEL)) ) {
+                    alt61=1;
                 }
 
 
-                switch (alt60) {
+                switch (alt61) {
             	case 1 :
             	    // InternalXMachine.g:5235:4: rule__XEvent__OrderedChildrenAssignment_10_1
             	    {
@@ -18917,7 +18928,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop60;
+            	    break loop61;
                 }
             } while (true);
 
@@ -19245,17 +19256,17 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getEventSyncAccess().getGroup_1_1()); 
             }
             // InternalXMachine.g:5345:2: ( rule__EventSync__Group_1_1__0 )?
-            int alt61=2;
-            int LA61_0 = input.LA(1);
+            int alt62=2;
+            int LA62_0 = input.LA(1);
 
-            if ( (LA61_0==RULE_ID) ) {
-                int LA61_1 = input.LA(2);
+            if ( (LA62_0==RULE_ID) ) {
+                int LA62_1 = input.LA(2);
 
-                if ( (LA61_1==97) ) {
-                    alt61=1;
+                if ( (LA62_1==97) ) {
+                    alt62=1;
                 }
             }
-            switch (alt61) {
+            switch (alt62) {
                 case 1 :
                     // InternalXMachine.g:5345:3: rule__EventSync__Group_1_1__0
                     {
@@ -19675,13 +19686,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXParameterAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:5480:2: ( rule__XParameter__CommentAssignment_1 )?
-            int alt62=2;
-            int LA62_0 = input.LA(1);
+            int alt63=2;
+            int LA63_0 = input.LA(1);
 
-            if ( (LA62_0==RULE_STRING) ) {
-                alt62=1;
+            if ( (LA63_0==RULE_STRING) ) {
+                alt63=1;
             }
-            switch (alt62) {
+            switch (alt63) {
                 case 1 :
                     // InternalXMachine.g:5480:3: rule__XParameter__CommentAssignment_1
                     {
@@ -19938,13 +19949,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXGuardAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:5561:2: ( rule__XGuard__CommentAssignment_1 )?
-            int alt63=2;
-            int LA63_0 = input.LA(1);
+            int alt64=2;
+            int LA64_0 = input.LA(1);
 
-            if ( (LA63_0==RULE_STRING) ) {
-                alt63=1;
+            if ( (LA64_0==RULE_STRING) ) {
+                alt64=1;
             }
-            switch (alt63) {
+            switch (alt64) {
                 case 1 :
                     // InternalXMachine.g:5561:3: rule__XGuard__CommentAssignment_1
                     {
@@ -20038,13 +20049,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXGuardAccess().getTheoremAssignment_2()); 
             }
             // InternalXMachine.g:5588:2: ( rule__XGuard__TheoremAssignment_2 )?
-            int alt64=2;
-            int LA64_0 = input.LA(1);
+            int alt65=2;
+            int LA65_0 = input.LA(1);
 
-            if ( (LA64_0==204) ) {
-                alt64=1;
+            if ( (LA65_0==204) ) {
+                alt65=1;
             }
-            switch (alt64) {
+            switch (alt65) {
                 case 1 :
                     // InternalXMachine.g:5588:3: rule__XGuard__TheoremAssignment_2
                     {
@@ -20390,13 +20401,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXWitnessAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:5696:2: ( rule__XWitness__CommentAssignment_1 )?
-            int alt65=2;
-            int LA65_0 = input.LA(1);
+            int alt66=2;
+            int LA66_0 = input.LA(1);
 
-            if ( (LA65_0==RULE_STRING) ) {
-                alt65=1;
+            if ( (LA66_0==RULE_STRING) ) {
+                alt66=1;
             }
-            switch (alt65) {
+            switch (alt66) {
                 case 1 :
                     // InternalXMachine.g:5696:3: rule__XWitness__CommentAssignment_1
                     {
@@ -20742,13 +20753,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXActionAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:5804:2: ( rule__XAction__CommentAssignment_1 )?
-            int alt66=2;
-            int LA66_0 = input.LA(1);
+            int alt67=2;
+            int LA67_0 = input.LA(1);
 
-            if ( (LA66_0==RULE_STRING) ) {
-                alt66=1;
+            if ( (LA67_0==RULE_STRING) ) {
+                alt67=1;
             }
-            switch (alt66) {
+            switch (alt67) {
                 case 1 :
                     // InternalXMachine.g:5804:3: rule__XAction__CommentAssignment_1
                     {
@@ -21247,13 +21258,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXRecordAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:5966:2: ( rule__XRecord__CommentAssignment_1 )?
-            int alt67=2;
-            int LA67_0 = input.LA(1);
+            int alt68=2;
+            int LA68_0 = input.LA(1);
 
-            if ( (LA67_0==RULE_STRING) ) {
-                alt67=1;
+            if ( (LA68_0==RULE_STRING) ) {
+                alt68=1;
             }
-            switch (alt67) {
+            switch (alt68) {
                 case 1 :
                     // InternalXMachine.g:5966:3: rule__XRecord__CommentAssignment_1
                     {
@@ -21347,13 +21358,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXRecordAccess().getAlternatives_2()); 
             }
             // InternalXMachine.g:5993:2: ( rule__XRecord__Alternatives_2 )?
-            int alt68=2;
-            int LA68_0 = input.LA(1);
+            int alt69=2;
+            int LA69_0 = input.LA(1);
 
-            if ( ((LA68_0>=170 && LA68_0<=173)) ) {
-                alt68=1;
+            if ( ((LA69_0>=170 && LA69_0<=173)) ) {
+                alt69=1;
             }
-            switch (alt68) {
+            switch (alt69) {
                 case 1 :
                     // InternalXMachine.g:5993:3: rule__XRecord__Alternatives_2
                     {
@@ -21625,13 +21636,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXRecordAccess().getGroup_5()); 
             }
             // InternalXMachine.g:6074:2: ( rule__XRecord__Group_5__0 )?
-            int alt69=2;
-            int LA69_0 = input.LA(1);
+            int alt70=2;
+            int LA70_0 = input.LA(1);
 
-            if ( ((LA69_0>=176 && LA69_0<=177)) ) {
-                alt69=1;
+            if ( ((LA70_0>=176 && LA70_0<=177)) ) {
+                alt70=1;
             }
-            switch (alt69) {
+            switch (alt70) {
                 case 1 :
                     // InternalXMachine.g:6074:3: rule__XRecord__Group_5__0
                     {
@@ -21725,17 +21736,17 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXRecordAccess().getAlternatives_6()); 
             }
             // InternalXMachine.g:6101:2: ( rule__XRecord__Alternatives_6 )*
-            loop70:
+            loop71:
             do {
-                int alt70=2;
-                int LA70_0 = input.LA(1);
+                int alt71=2;
+                int LA71_0 = input.LA(1);
 
-                if ( ((LA70_0>=178 && LA70_0<=179)||LA70_0==203) ) {
-                    alt70=1;
+                if ( ((LA71_0>=178 && LA71_0<=179)||LA71_0==203) ) {
+                    alt71=1;
                 }
 
 
-                switch (alt70) {
+                switch (alt71) {
             	case 1 :
             	    // InternalXMachine.g:6101:3: rule__XRecord__Alternatives_6
             	    {
@@ -21749,7 +21760,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop70;
+            	    break loop71;
                 }
             } while (true);
 
@@ -22494,13 +22505,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getFieldAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:6344:2: ( rule__Field__CommentAssignment_1 )?
-            int alt71=2;
-            int LA71_0 = input.LA(1);
+            int alt72=2;
+            int LA72_0 = input.LA(1);
 
-            if ( (LA71_0==RULE_STRING) ) {
-                alt71=1;
+            if ( (LA72_0==RULE_STRING) ) {
+                alt72=1;
             }
-            switch (alt71) {
+            switch (alt72) {
                 case 1 :
                     // InternalXMachine.g:6344:3: rule__Field__CommentAssignment_1
                     {
@@ -22762,13 +22773,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getFieldAccess().getMultiplicityAssignment_4()); 
             }
             // InternalXMachine.g:6425:2: ( rule__Field__MultiplicityAssignment_4 )?
-            int alt72=2;
-            int LA72_0 = input.LA(1);
+            int alt73=2;
+            int LA73_0 = input.LA(1);
 
-            if ( ((LA72_0>=183 && LA72_0<=185)) ) {
-                alt72=1;
+            if ( ((LA73_0>=183 && LA73_0<=185)) ) {
+                alt73=1;
             }
-            switch (alt72) {
+            switch (alt73) {
                 case 1 :
                     // InternalXMachine.g:6425:3: rule__Field__MultiplicityAssignment_4
                     {
@@ -23025,13 +23036,13 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                before(grammarAccess.getXConstraintAccess().getCommentAssignment_1()); 
             }
             // InternalXMachine.g:6506:2: ( rule__XConstraint__CommentAssignment_1 )?
-            int alt73=2;
-            int LA73_0 = input.LA(1);
+            int alt74=2;
+            int LA74_0 = input.LA(1);
 
-            if ( (LA73_0==RULE_STRING) ) {
-                alt73=1;
+            if ( (LA74_0==RULE_STRING) ) {
+                alt74=1;
             }
-            switch (alt73) {
+            switch (alt74) {
                 case 1 :
                     // InternalXMachine.g:6506:3: rule__XConstraint__CommentAssignment_1
                     {
@@ -23255,19 +23266,19 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             // InternalXMachine.g:6574:2: ( rule__Machine__UnorderedGroup_4__0 )?
             {
             // InternalXMachine.g:6574:2: ( rule__Machine__UnorderedGroup_4__0 )?
-            int alt74=2;
-            int LA74_0 = input.LA(1);
+            int alt75=2;
+            int LA75_0 = input.LA(1);
 
-            if ( LA74_0 == 192 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 0) ) {
-                alt74=1;
+            if ( LA75_0 == 192 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 0) ) {
+                alt75=1;
             }
-            else if ( LA74_0 == 188 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 1) ) {
-                alt74=1;
+            else if ( LA75_0 == 188 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 1) ) {
+                alt75=1;
             }
-            else if ( LA74_0 == 189 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 2) ) {
-                alt74=1;
+            else if ( LA75_0 == 189 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 2) ) {
+                alt75=1;
             }
-            switch (alt74) {
+            switch (alt75) {
                 case 1 :
                     // InternalXMachine.g:6574:2: rule__Machine__UnorderedGroup_4__0
                     {
@@ -23313,26 +23324,26 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             // InternalXMachine.g:6588:3: ( ({...}? => ( ( ( ( rule__Machine__OrderedChildrenAssignment_4_0 ) ) ( ( ( rule__Machine__OrderedChildrenAssignment_4_0 )=> rule__Machine__OrderedChildrenAssignment_4_0 )* ) ) ) ) | ({...}? => ( ( ( rule__Machine__Group_4_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Machine__Group_4_2__0 ) ) ) ) )
             {
             // InternalXMachine.g:6588:3: ( ({...}? => ( ( ( ( rule__Machine__OrderedChildrenAssignment_4_0 ) ) ( ( ( rule__Machine__OrderedChildrenAssignment_4_0 )=> rule__Machine__OrderedChildrenAssignment_4_0 )* ) ) ) ) | ({...}? => ( ( ( rule__Machine__Group_4_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Machine__Group_4_2__0 ) ) ) ) )
-            int alt76=3;
-            int LA76_0 = input.LA(1);
+            int alt77=3;
+            int LA77_0 = input.LA(1);
 
-            if ( LA76_0 == 192 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 0) ) {
-                alt76=1;
+            if ( LA77_0 == 192 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 0) ) {
+                alt77=1;
             }
-            else if ( LA76_0 == 188 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 1) ) {
-                alt76=2;
+            else if ( LA77_0 == 188 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 1) ) {
+                alt77=2;
             }
-            else if ( LA76_0 == 189 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 2) ) {
-                alt76=3;
+            else if ( LA77_0 == 189 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 2) ) {
+                alt77=3;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 76, 0, input);
+                    new NoViableAltException("", 77, 0, input);
 
                 throw nvae;
             }
-            switch (alt76) {
+            switch (alt77) {
                 case 1 :
                     // InternalXMachine.g:6589:3: ({...}? => ( ( ( ( rule__Machine__OrderedChildrenAssignment_4_0 ) ) ( ( ( rule__Machine__OrderedChildrenAssignment_4_0 )=> rule__Machine__OrderedChildrenAssignment_4_0 )* ) ) ) )
                     {
@@ -23381,19 +23392,19 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                        before(grammarAccess.getMachineAccess().getOrderedChildrenAssignment_4_0()); 
                     }
                     // InternalXMachine.g:6605:7: ( ( rule__Machine__OrderedChildrenAssignment_4_0 )=> rule__Machine__OrderedChildrenAssignment_4_0 )*
-                    loop75:
+                    loop76:
                     do {
-                        int alt75=2;
-                        int LA75_0 = input.LA(1);
+                        int alt76=2;
+                        int LA76_0 = input.LA(1);
 
-                        if ( (LA75_0==192) ) {
-                            int LA75_1 = input.LA(2);
+                        if ( (LA76_0==192) ) {
+                            int LA76_1 = input.LA(2);
 
-                            if ( (LA75_1==RULE_ID) ) {
-                                int LA75_3 = input.LA(3);
+                            if ( (LA76_1==RULE_ID) ) {
+                                int LA76_3 = input.LA(3);
 
                                 if ( (synpred1_InternalXMachine()) ) {
-                                    alt75=1;
+                                    alt76=1;
                                 }
 
 
@@ -23403,7 +23414,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                         }
 
 
-                        switch (alt75) {
+                        switch (alt76) {
                     	case 1 :
                     	    // InternalXMachine.g:6605:8: ( rule__Machine__OrderedChildrenAssignment_4_0 )=> rule__Machine__OrderedChildrenAssignment_4_0
                     	    {
@@ -23417,7 +23428,7 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
                     	    break;
 
                     	default :
-                    	    break loop75;
+                    	    break loop76;
                         }
                     } while (true);
 
@@ -23572,19 +23583,19 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             state._fsp--;
             if (state.failed) return ;
             // InternalXMachine.g:6655:2: ( rule__Machine__UnorderedGroup_4__1 )?
-            int alt77=2;
-            int LA77_0 = input.LA(1);
+            int alt78=2;
+            int LA78_0 = input.LA(1);
 
-            if ( LA77_0 == 192 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 0) ) {
-                alt77=1;
+            if ( LA78_0 == 192 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 0) ) {
+                alt78=1;
             }
-            else if ( LA77_0 == 188 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 1) ) {
-                alt77=1;
+            else if ( LA78_0 == 188 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 1) ) {
+                alt78=1;
             }
-            else if ( LA77_0 == 189 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 2) ) {
-                alt77=1;
+            else if ( LA78_0 == 189 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 2) ) {
+                alt78=1;
             }
-            switch (alt77) {
+            switch (alt78) {
                 case 1 :
                     // InternalXMachine.g:6655:2: rule__Machine__UnorderedGroup_4__1
                     {
@@ -23633,19 +23644,19 @@ public class InternalXMachineParser extends AbstractInternalContentAssistParser 
             state._fsp--;
             if (state.failed) return ;
             // InternalXMachine.g:6667:2: ( rule__Machine__UnorderedGroup_4__2 )?
-            int alt78=2;
-            int LA78_0 = input.LA(1);
+            int alt79=2;
+            int LA79_0 = input.LA(1);
 
-            if ( LA78_0 == 192 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 0) ) {
-                alt78=1;
+            if ( LA79_0 == 192 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 0) ) {
+                alt79=1;
             }
-            else if ( LA78_0 == 188 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 1) ) {
-                alt78=1;
+            else if ( LA79_0 == 188 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 1) ) {
+                alt79=1;
             }
-            else if ( LA78_0 == 189 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 2) ) {
-                alt78=1;
+            else if ( LA79_0 == 189 && getUnorderedGroupHelper().canSelect(grammarAccess.getMachineAccess().getUnorderedGroup_4(), 2) ) {
+                alt79=1;
             }
-            switch (alt78) {
+            switch (alt79) {
                 case 1 :
                     // InternalXMachine.g:6667:2: rule__Machine__UnorderedGroup_4__2
                     {

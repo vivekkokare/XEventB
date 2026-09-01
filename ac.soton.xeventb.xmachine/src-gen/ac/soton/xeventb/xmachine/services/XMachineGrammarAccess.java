@@ -542,13 +542,13 @@ public class XMachineGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//XIndividualVariable returns eagent::AgentTypedVariable:
 		//    {eagent::AgentTypedVariable}
 		//    (comment=STRING)?
-		//    ('variable' | 'var') name=ID (':' type = XType)? ('=' value=XFormula)? ('visible' agents+=ID+)
+		//    ('variable' | 'var') name=ID (':' type = XType)? ('=' value=XFormula)? ('visible' agents+=ID+)?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{eagent::AgentTypedVariable}
 		//(comment=STRING)?
-		//('variable' | 'var') name=ID (':' type = XType)? ('=' value=XFormula)? ('visible' agents+=ID+)
+		//('variable' | 'var') name=ID (':' type = XType)? ('=' value=XFormula)? ('visible' agents+=ID+)?
 		public Group getGroup() { return cGroup; }
 		
 		//{eagent::AgentTypedVariable}
@@ -599,7 +599,7 @@ public class XMachineGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//XFormula
 		public RuleCall getValueXFormulaParserRuleCall_5_1_0() { return cValueXFormulaParserRuleCall_5_1_0; }
 		
-		//('visible' agents+=ID+)
+		//('visible' agents+=ID+)?
 		public Group getGroup_6() { return cGroup_6; }
 		
 		//'visible'
@@ -2882,7 +2882,7 @@ public class XMachineGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//XIndividualVariable returns eagent::AgentTypedVariable:
 	//    {eagent::AgentTypedVariable}
 	//    (comment=STRING)?
-	//    ('variable' | 'var') name=ID (':' type = XType)? ('=' value=XFormula)? ('visible' agents+=ID+)
+	//    ('variable' | 'var') name=ID (':' type = XType)? ('=' value=XFormula)? ('visible' agents+=ID+)?
 	//;
 	public XIndividualVariableElements getXIndividualVariableAccess() {
 		return pXIndividualVariable;

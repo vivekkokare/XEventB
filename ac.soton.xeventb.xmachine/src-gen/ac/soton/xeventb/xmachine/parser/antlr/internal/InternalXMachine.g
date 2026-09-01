@@ -844,7 +844,7 @@ ruleXIndividualVariable returns [EObject current=null]
 					}
 				)
 			)+
-		)
+		)?
 	)
 ;
 

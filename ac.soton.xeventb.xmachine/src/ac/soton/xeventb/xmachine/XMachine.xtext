@@ -92,7 +92,7 @@ XMultipleVariable returns emachine::Variable:
 XIndividualVariable returns eagent::AgentTypedVariable:
 	{eagent::AgentTypedVariable}
 	(comment=STRING)?
-	('variable' | 'var') name=ID (':' type = XType)? ('=' value=XFormula)? ('visible' agents+=ID+)
+	('variable' | 'var') name=ID (':' type = XType)? ('=' value=XFormula)? ('visible' agents+=ID+)?
 ;
 
 XType returns ecore::EString:
