@@ -232,8 +232,38 @@ class XMachineGenerator extends AbstractGenerator {
 		for (child : orderedChildren) {
 			if (child instanceof Event) {
 				if (child.name.equals("INITIALISATION")) {
-					
 					// Exactly the same but without the existential quantifiers.
+					for (action : child.actions) {
+						if (action.name.equals("shadow_update")) {
+							// Same transformation as an ordinary event, but WITHOUT the
+							// existential quantifier over an "old" H — there is no old H
+							// at initialisation (Rule R6: H := {h' | L(h')}).
+							var assignment = action.action
+							val String[] split_string = assignment.split(":∣")
+							var lhs = split_string.get(0)
+							var rhs = split_string.get(1)
+
+							lhs = lhs + ", " + shadowVariable
+
+							val shadowHiddenPrimedVariable = new ArrayList<String>();
+							for (hiddenVariable : hiddenVariables) {
+								shadowHiddenPrimedVariable.add("shadow_" + hiddenVariable + "'")
+							}
+
+							assignment = lhs + " :∣ " + rhs + " ∧ "
+
+							var String shadowUpdate = ""
+							shadowUpdate += shadowHiddenPrimedVariable.toArray.join(" ↦ ")
+							shadowUpdate += " ∣ "
+							for (hiddenVariable : hiddenVariables) {
+								rhs = rhs.replaceAll(hiddenVariable, "shadow_" + hiddenVariable)
+							}
+							shadowUpdate += rhs
+
+							assignment += shadowVariable + "' = {" + shadowUpdate + "}"
+							action.action = assignment
+						}
+					}
 				} else {
 					// Assume that there is a single non-deterministic action related to hidden variables labelled "shadow_update"
 					for (action : child.actions) {
@@ -277,7 +307,6 @@ class XMachineGenerator extends AbstractGenerator {
 				}
 			}
 		}
-	}
 
 //		val rodinInternals = CoreFactory.eINSTANCE.createAnnotation()
 //		rodinInternals.source = PersistencePlugin.SOURCE_RODIN_INTERNAL_ANNOTATION
