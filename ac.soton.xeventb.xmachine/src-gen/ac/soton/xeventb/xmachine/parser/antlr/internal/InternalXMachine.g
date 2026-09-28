@@ -1290,7 +1290,7 @@ ruleXIndividualInvariant returns [EObject current=null]
 		(
 			{
 				$current = forceCreateModelElement(
-					grammarAccess.getXIndividualInvariantAccess().getInvariantAction_0(),
+					grammarAccess.getXIndividualInvariantAccess().getCompleteIgnoranceInvariantAction_0(),
 					$current);
 			}
 		)
@@ -1312,32 +1312,19 @@ ruleXIndividualInvariant returns [EObject current=null]
 				}
 			)
 		)?
-		(
-			(
-				(
-					lv_theorem_2_0='theorem'
-					{
-						newLeafNode(lv_theorem_2_0, grammarAccess.getXIndividualInvariantAccess().getTheoremTheoremKeyword_2_0_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getXIndividualInvariantRule());
-						}
-						setWithLastConsumed($current, "theorem", lv_theorem_2_0 != null, "theorem");
-					}
-				)
-			)
-			    |
-			otherlv_3='invariant'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getXIndividualInvariantAccess().getInvariantKeyword_2_1());
-			}
-		)
+		otherlv_2='complete'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getXIndividualInvariantAccess().getCompleteKeyword_2());
+		}
+		otherlv_3='ignorance'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getXIndividualInvariantAccess().getIgnoranceKeyword_3());
+		}
 		(
 			(
 				lv_name_4_0=RULE_XLABEL
 				{
-					newLeafNode(lv_name_4_0, grammarAccess.getXIndividualInvariantAccess().getNameXLABELTerminalRuleCall_3_0());
+					newLeafNode(lv_name_4_0, grammarAccess.getXIndividualInvariantAccess().getNameXLABELTerminalRuleCall_4_0());
 				}
 				{
 					if ($current==null) {
@@ -1352,24 +1339,107 @@ ruleXIndividualInvariant returns [EObject current=null]
 			)
 		)
 		(
+			otherlv_5='if'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getXIndividualInvariantAccess().getIfKeyword_5_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getXIndividualInvariantAccess().getConditionXFormulaParserRuleCall_5_1_0());
+					}
+					lv_condition_6_0=ruleXFormula
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getXIndividualInvariantRule());
+						}
+						set(
+							$current,
+							"condition",
+							lv_condition_6_0,
+							"ac.soton.xeventb.xmachine.XMachine.XFormula");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_7='then'
+			{
+				newLeafNode(otherlv_7, grammarAccess.getXIndividualInvariantAccess().getThenKeyword_5_2());
+			}
+		)?
+		otherlv_8='knows'
+		{
+			newLeafNode(otherlv_8, grammarAccess.getXIndividualInvariantAccess().getKnowsKeyword_6());
+		}
+		otherlv_9='only'
+		{
+			newLeafNode(otherlv_9, grammarAccess.getXIndividualInvariantAccess().getOnlyKeyword_7());
+		}
+		(
 			(
 				{
-					newCompositeNode(grammarAccess.getXIndividualInvariantAccess().getPredicateXFormulaParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getXIndividualInvariantAccess().getFactXFormulaParserRuleCall_8_0());
 				}
-				lv_predicate_5_0=ruleXFormula
+				lv_fact_10_0=ruleXFormula
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getXIndividualInvariantRule());
 					}
 					set(
 						$current,
-						"predicate",
-						lv_predicate_5_0,
+						"fact",
+						lv_fact_10_0,
 						"ac.soton.xeventb.xmachine.XMachine.XFormula");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
+		otherlv_11='about'
+		{
+			newLeafNode(otherlv_11, grammarAccess.getXIndividualInvariantAccess().getAboutKeyword_9());
+		}
+		(
+			(
+				lv_variables_12_0=RULE_ID
+				{
+					newLeafNode(lv_variables_12_0, grammarAccess.getXIndividualInvariantAccess().getVariablesIDTerminalRuleCall_10_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getXIndividualInvariantRule());
+					}
+					addWithLastConsumed(
+						$current,
+						"variables",
+						lv_variables_12_0,
+						"ac.soton.xeventb.xmachine.XMachine.ID");
+				}
+			)
+		)+
+		(
+			otherlv_13='visible'
+			{
+				newLeafNode(otherlv_13, grammarAccess.getXIndividualInvariantAccess().getVisibleKeyword_11_0());
+			}
+			(
+				(
+					lv_agents_14_0=RULE_ID
+					{
+						newLeafNode(lv_agents_14_0, grammarAccess.getXIndividualInvariantAccess().getAgentsIDTerminalRuleCall_11_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getXIndividualInvariantRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"agents",
+							lv_agents_14_0,
+							"ac.soton.xeventb.xmachine.XMachine.ID");
+					}
+				)
+			)+
+		)?
 	)
 ;
 

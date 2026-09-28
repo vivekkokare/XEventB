@@ -3,6 +3,8 @@
  */
 package ac.soton.xeventb.xmachine.tests;
 
+import ac.soton.eventb.emf.agent.AgentPackage;
+import ac.soton.eventb.emf.agent.AgentTypedVariable;
 import ac.soton.xeventb.tests.common.AssertExtensions;
 import ac.soton.xeventb.tests.common.AssertMachineExtensions;
 import com.google.inject.Inject;
@@ -15,6 +17,7 @@ import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.machine.Event;
 import org.eventb.emf.core.machine.Machine;
 import org.junit.Assert;
@@ -46,6 +49,7 @@ public class XMachineParsingTest {
   @Before
   public void registerEPackages() {
     this._assertMachineExtensions.registerMachineEPackage();
+    AgentPackage.eINSTANCE.eClass();
   }
   
   /**
@@ -173,6 +177,55 @@ public class XMachineParsingTest {
       this._assertMachineExtensions.assertEvent(event0, "e:ordinary:false");
       final Event event1 = events[1];
       this._assertMachineExtensions.assertEvent(event1, "f:ordinary:false");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testTypedVariableWithoutVisibleStillParses() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("machine testNoVisible");
+      _builder.newLine();
+      _builder.append("variable x : N = 0");
+      _builder.newLine();
+      _builder.append("end");
+      _builder.newLine();
+      final String testInput = _builder.toString();
+      final Machine result = this.parseHelper.parse(testInput);
+      Assert.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      this._assertExtensions.assertEmpty(errors);
+      Assert.assertTrue((result instanceof Machine));
+      this._assertMachineExtensions.assertMachine(result, "testNoVisible", null);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testTypedVariableWithVisibleRecordsAgent() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("machine testWithVisible");
+      _builder.newLine();
+      _builder.append("variable x : N = 0 visible C1");
+      _builder.newLine();
+      _builder.append("end");
+      _builder.newLine();
+      final String testInput = _builder.toString();
+      final Machine result = this.parseHelper.parse(testInput);
+      Assert.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      this._assertExtensions.assertEmpty(errors);
+      Assert.assertTrue((result instanceof Machine));
+      this._assertMachineExtensions.assertMachine(result, "testWithVisible", null);
+      EventBElement _get = result.getOrderedChildren().get(0);
+      final AgentTypedVariable variable = ((AgentTypedVariable) _get);
+      Assert.assertEquals("x", variable.getName());
+      Assert.assertEquals(1, variable.getAgents().size());
+      Assert.assertEquals("C1", variable.getAgents().get(0));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

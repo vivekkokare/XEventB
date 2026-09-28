@@ -17,6 +17,7 @@ package ac.soton.xeventb.xmachine.generator
 import ac.soton.emf.translator.TranslatorFactory
 import ac.soton.eventb.emf.agent.Agent
 import ac.soton.eventb.emf.agent.AgentTypedVariable
+import ac.soton.eventb.emf.agent.CompleteIgnoranceInvariant
 import ac.soton.eventb.emf.containment.Containment
 import ac.soton.eventb.emf.core.^extension.coreextension.TypedVariable
 import ac.soton.xeventb.common.Utils
@@ -229,8 +230,13 @@ class XMachineGenerator extends AbstractGenerator {
 			CorePackage.Literals.EVENT_BELEMENT__ORDERED_CHILDREN
 		) as EList<EventBElement>
 
+		val completeIgnoranceInvariants = new ArrayList<CompleteIgnoranceInvariant>()
 		for (child : orderedChildren) {
-			if (child instanceof Event) {
+			if (child instanceof CompleteIgnoranceInvariant) {
+				completeIgnoranceInvariants.add(child)
+				
+				
+			} else if (child instanceof Event) {
 				if (child.name.equals("INITIALISATION")) {
 					// Exactly the same but without the existential quantifiers.
 					for (action : child.actions) {
@@ -305,6 +311,44 @@ class XMachineGenerator extends AbstractGenerator {
 						}
 					}
 				}
+			}
+		}
+
+		// Generate invariants for complete ignorance invariants
+		for (child : completeIgnoranceInvariants) {
+			val visible_agents = child.agents
+			if (visible_agents.contains(agent)){
+				val shadowHiddenVariable = new ArrayList<String>()
+				val variables = child.variables
+				for (hiddenVariable : variables) {
+					shadowHiddenVariable.add("shadow_" + hiddenVariable)
+				}
+				var predicate = "(" + child.condition + ")"
+				predicate += " ⇒ "
+				predicate += "("
+				predicate += "∀" + shadowHiddenVariable.join(", ")
+				predicate += " · "
+				var fact = child.fact
+				for (hiddenVariable : variables) {
+					fact = fact.replaceAll(hiddenVariable, "shadow_" + hiddenVariable)
+				}
+				predicate += fact
+				predicate += " ⇒ "
+				predicate += "("
+				predicate += "∃ "
+				predicate += hiddenVariables.join(", ")
+				predicate += " · "
+				predicate += hiddenVariables.join(" ↦ ")
+				predicate += " ∈ "
+				predicate += shadowVariable
+				predicate += " ∧ "
+				predicate += variables.join(" ↦ ")
+				predicate += " = "
+				predicate += shadowHiddenVariable.join(" ↦ ")
+
+				predicate += ")"
+				predicate += ")"
+				EventBEMFUtils.createInvariant(editingDomain, copy, child.name, predicate, false)
 			}
 		}
 

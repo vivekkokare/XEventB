@@ -37,7 +37,6 @@ public class XMachineParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXIndividualVariableAccess().getAlternatives_2(), "rule__XIndividualVariable__Alternatives_2");
 			builder.put(grammarAccess.getXTYPEOPERATORAccess().getAlternatives(), "rule__XTYPEOPERATOR__Alternatives");
 			builder.put(grammarAccess.getXTypePrimitiveAccess().getAlternatives(), "rule__XTypePrimitive__Alternatives");
-			builder.put(grammarAccess.getXIndividualInvariantAccess().getAlternatives_2(), "rule__XIndividualInvariant__Alternatives_2");
 			builder.put(grammarAccess.getXEventAccess().getAlternatives_5(), "rule__XEvent__Alternatives_5");
 			builder.put(grammarAccess.getXEventAccess().getAlternatives_8_0(), "rule__XEvent__Alternatives_8_0");
 			builder.put(grammarAccess.getXEventAccess().getAlternatives_9_0(), "rule__XEvent__Alternatives_9_0");
@@ -80,6 +79,8 @@ public class XMachineParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXTypePrimitiveAccess().getGroup_7(), "rule__XTypePrimitive__Group_7__0");
 			builder.put(grammarAccess.getXMultipleInvariantAccess().getGroup(), "rule__XMultipleInvariant__Group__0");
 			builder.put(grammarAccess.getXIndividualInvariantAccess().getGroup(), "rule__XIndividualInvariant__Group__0");
+			builder.put(grammarAccess.getXIndividualInvariantAccess().getGroup_5(), "rule__XIndividualInvariant__Group_5__0");
+			builder.put(grammarAccess.getXIndividualInvariantAccess().getGroup_11(), "rule__XIndividualInvariant__Group_11__0");
 			builder.put(grammarAccess.getXVariantAccess().getGroup(), "rule__XVariant__Group__0");
 			builder.put(grammarAccess.getXEventAccess().getGroup(), "rule__XEvent__Group__0");
 			builder.put(grammarAccess.getXEventAccess().getGroup_5_0(), "rule__XEvent__Group_5_0__0");
@@ -132,9 +133,11 @@ public class XMachineParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXMultipleInvariantAccess().getNameAssignment_2(), "rule__XMultipleInvariant__NameAssignment_2");
 			builder.put(grammarAccess.getXMultipleInvariantAccess().getPredicateAssignment_3(), "rule__XMultipleInvariant__PredicateAssignment_3");
 			builder.put(grammarAccess.getXIndividualInvariantAccess().getCommentAssignment_1(), "rule__XIndividualInvariant__CommentAssignment_1");
-			builder.put(grammarAccess.getXIndividualInvariantAccess().getTheoremAssignment_2_0(), "rule__XIndividualInvariant__TheoremAssignment_2_0");
-			builder.put(grammarAccess.getXIndividualInvariantAccess().getNameAssignment_3(), "rule__XIndividualInvariant__NameAssignment_3");
-			builder.put(grammarAccess.getXIndividualInvariantAccess().getPredicateAssignment_4(), "rule__XIndividualInvariant__PredicateAssignment_4");
+			builder.put(grammarAccess.getXIndividualInvariantAccess().getNameAssignment_4(), "rule__XIndividualInvariant__NameAssignment_4");
+			builder.put(grammarAccess.getXIndividualInvariantAccess().getConditionAssignment_5_1(), "rule__XIndividualInvariant__ConditionAssignment_5_1");
+			builder.put(grammarAccess.getXIndividualInvariantAccess().getFactAssignment_8(), "rule__XIndividualInvariant__FactAssignment_8");
+			builder.put(grammarAccess.getXIndividualInvariantAccess().getVariablesAssignment_10(), "rule__XIndividualInvariant__VariablesAssignment_10");
+			builder.put(grammarAccess.getXIndividualInvariantAccess().getAgentsAssignment_11_1(), "rule__XIndividualInvariant__AgentsAssignment_11_1");
 			builder.put(grammarAccess.getXVariantAccess().getCommentAssignment_1(), "rule__XVariant__CommentAssignment_1");
 			builder.put(grammarAccess.getXVariantAccess().getNameAssignment_3(), "rule__XVariant__NameAssignment_3");
 			builder.put(grammarAccess.getXVariantAccess().getExpressionAssignment_4(), "rule__XVariant__ExpressionAssignment_4");

@@ -922,34 +922,46 @@ public class XMachineGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class XIndividualInvariantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ac.soton.xeventb.xmachine.XMachine.XIndividualInvariant");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cInvariantAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cCompleteIgnoranceInvariantAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cCommentAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cCommentSTRINGTerminalRuleCall_1_0 = (RuleCall)cCommentAssignment_1.eContents().get(0);
-		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
-		private final Assignment cTheoremAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
-		private final Keyword cTheoremTheoremKeyword_2_0_0 = (Keyword)cTheoremAssignment_2_0.eContents().get(0);
-		private final Keyword cInvariantKeyword_2_1 = (Keyword)cAlternatives_2.eContents().get(1);
-		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cNameXLABELTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
-		private final Assignment cPredicateAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cPredicateXFormulaParserRuleCall_4_0 = (RuleCall)cPredicateAssignment_4.eContents().get(0);
+		private final Keyword cCompleteKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cIgnoranceKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cNameAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cNameXLABELTerminalRuleCall_4_0 = (RuleCall)cNameAssignment_4.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cIfKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cConditionAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cConditionXFormulaParserRuleCall_5_1_0 = (RuleCall)cConditionAssignment_5_1.eContents().get(0);
+		private final Keyword cThenKeyword_5_2 = (Keyword)cGroup_5.eContents().get(2);
+		private final Keyword cKnowsKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cOnlyKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cFactAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cFactXFormulaParserRuleCall_8_0 = (RuleCall)cFactAssignment_8.eContents().get(0);
+		private final Keyword cAboutKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Assignment cVariablesAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final RuleCall cVariablesIDTerminalRuleCall_10_0 = (RuleCall)cVariablesAssignment_10.eContents().get(0);
+		private final Group cGroup_11 = (Group)cGroup.eContents().get(11);
+		private final Keyword cVisibleKeyword_11_0 = (Keyword)cGroup_11.eContents().get(0);
+		private final Assignment cAgentsAssignment_11_1 = (Assignment)cGroup_11.eContents().get(1);
+		private final RuleCall cAgentsIDTerminalRuleCall_11_1_0 = (RuleCall)cAgentsAssignment_11_1.eContents().get(0);
 		
-		//XIndividualInvariant returns emachine::Invariant:
-		//    {emachine::Invariant}
+		//XIndividualInvariant returns eagent::CompleteIgnoranceInvariant:
+		//    {eagent::CompleteIgnoranceInvariant}
 		//    (comment=STRING)?
-		//    (theorem?='theorem' | 'invariant')
-		//    name=XLABEL predicate=XFormula
+		//    'complete' 'ignorance'
+		//    name=XLABEL ('if' condition=XFormula 'then')? 'knows' 'only' fact=XFormula 'about' variables+=ID+ ('visible' agents+=ID+)?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{emachine::Invariant}
+		//{eagent::CompleteIgnoranceInvariant}
 		//(comment=STRING)?
-		//(theorem?='theorem' | 'invariant')
-		//name=XLABEL predicate=XFormula
+		//'complete' 'ignorance'
+		//name=XLABEL ('if' condition=XFormula 'then')? 'knows' 'only' fact=XFormula 'about' variables+=ID+ ('visible' agents+=ID+)?
 		public Group getGroup() { return cGroup; }
 		
-		//{emachine::Invariant}
-		public Action getInvariantAction_0() { return cInvariantAction_0; }
+		//{eagent::CompleteIgnoranceInvariant}
+		public Action getCompleteIgnoranceInvariantAction_0() { return cCompleteIgnoranceInvariantAction_0; }
 		
 		//(comment=STRING)?
 		public Assignment getCommentAssignment_1() { return cCommentAssignment_1; }
@@ -957,29 +969,65 @@ public class XMachineGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//STRING
 		public RuleCall getCommentSTRINGTerminalRuleCall_1_0() { return cCommentSTRINGTerminalRuleCall_1_0; }
 		
-		//(theorem?='theorem' | 'invariant')
-		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		//'complete'
+		public Keyword getCompleteKeyword_2() { return cCompleteKeyword_2; }
 		
-		//theorem?='theorem'
-		public Assignment getTheoremAssignment_2_0() { return cTheoremAssignment_2_0; }
-		
-		//'theorem'
-		public Keyword getTheoremTheoremKeyword_2_0_0() { return cTheoremTheoremKeyword_2_0_0; }
-		
-		//'invariant'
-		public Keyword getInvariantKeyword_2_1() { return cInvariantKeyword_2_1; }
+		//'ignorance'
+		public Keyword getIgnoranceKeyword_3() { return cIgnoranceKeyword_3; }
 		
 		//name=XLABEL
-		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
+		public Assignment getNameAssignment_4() { return cNameAssignment_4; }
 		
 		//XLABEL
-		public RuleCall getNameXLABELTerminalRuleCall_3_0() { return cNameXLABELTerminalRuleCall_3_0; }
+		public RuleCall getNameXLABELTerminalRuleCall_4_0() { return cNameXLABELTerminalRuleCall_4_0; }
 		
-		//predicate=XFormula
-		public Assignment getPredicateAssignment_4() { return cPredicateAssignment_4; }
+		//('if' condition=XFormula 'then')?
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//'if'
+		public Keyword getIfKeyword_5_0() { return cIfKeyword_5_0; }
+		
+		//condition=XFormula
+		public Assignment getConditionAssignment_5_1() { return cConditionAssignment_5_1; }
 		
 		//XFormula
-		public RuleCall getPredicateXFormulaParserRuleCall_4_0() { return cPredicateXFormulaParserRuleCall_4_0; }
+		public RuleCall getConditionXFormulaParserRuleCall_5_1_0() { return cConditionXFormulaParserRuleCall_5_1_0; }
+		
+		//'then'
+		public Keyword getThenKeyword_5_2() { return cThenKeyword_5_2; }
+		
+		//'knows'
+		public Keyword getKnowsKeyword_6() { return cKnowsKeyword_6; }
+		
+		//'only'
+		public Keyword getOnlyKeyword_7() { return cOnlyKeyword_7; }
+		
+		//fact=XFormula
+		public Assignment getFactAssignment_8() { return cFactAssignment_8; }
+		
+		//XFormula
+		public RuleCall getFactXFormulaParserRuleCall_8_0() { return cFactXFormulaParserRuleCall_8_0; }
+		
+		//'about'
+		public Keyword getAboutKeyword_9() { return cAboutKeyword_9; }
+		
+		//variables+=ID+
+		public Assignment getVariablesAssignment_10() { return cVariablesAssignment_10; }
+		
+		//ID
+		public RuleCall getVariablesIDTerminalRuleCall_10_0() { return cVariablesIDTerminalRuleCall_10_0; }
+		
+		//('visible' agents+=ID+)?
+		public Group getGroup_11() { return cGroup_11; }
+		
+		//'visible'
+		public Keyword getVisibleKeyword_11_0() { return cVisibleKeyword_11_0; }
+		
+		//agents+=ID+
+		public Assignment getAgentsAssignment_11_1() { return cAgentsAssignment_11_1; }
+		
+		//ID
+		public RuleCall getAgentsIDTerminalRuleCall_11_1_0() { return cAgentsIDTerminalRuleCall_11_1_0; }
 	}
 	public class XVariantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ac.soton.xeventb.xmachine.XMachine.XVariant");
@@ -2957,11 +3005,11 @@ public class XMachineGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getXMultipleInvariantAccess().getRule();
 	}
 	
-	//XIndividualInvariant returns emachine::Invariant:
-	//    {emachine::Invariant}
+	//XIndividualInvariant returns eagent::CompleteIgnoranceInvariant:
+	//    {eagent::CompleteIgnoranceInvariant}
 	//    (comment=STRING)?
-	//    (theorem?='theorem' | 'invariant')
-	//    name=XLABEL predicate=XFormula
+	//    'complete' 'ignorance'
+	//    name=XLABEL ('if' condition=XFormula 'then')? 'knows' 'only' fact=XFormula 'about' variables+=ID+ ('visible' agents+=ID+)?
 	//;
 	public XIndividualInvariantElements getXIndividualInvariantAccess() {
 		return pXIndividualInvariant;

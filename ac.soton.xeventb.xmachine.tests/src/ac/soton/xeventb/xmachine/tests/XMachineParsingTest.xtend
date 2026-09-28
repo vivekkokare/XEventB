@@ -4,6 +4,8 @@
 package ac.soton.xeventb.xmachine.tests
 
 import ac.soton.xeventb.tests.common.AssertExtensions
+import ac.soton.eventb.emf.agent.AgentPackage
+import ac.soton.eventb.emf.agent.AgentTypedVariable
 import ac.soton.xeventb.tests.common.AssertMachineExtensions
 import com.google.inject.Inject
 import org.eclipse.xtext.testing.InjectWith
@@ -34,6 +36,7 @@ class XMachineParsingTest {
 	@Before
 	def void registerEPackages() {
 		registerMachineEPackage
+		AgentPackage.eINSTANCE.eClass()
 	}
 	
 	/**
@@ -130,5 +133,39 @@ class XMachineParsingTest {
 		event0.assertEvent("e:ordinary:false") 
 		val event1 = events.get(1)
 		event1.assertEvent("f:ordinary:false") 		
+	}
+	
+	@Test
+	def void testTypedVariableWithoutVisibleStillParses() {
+		val testInput = '''
+			machine testNoVisible
+			variable x : N = 0
+			end
+		'''
+		val result = testInput.parse
+		Assert.assertNotNull(result)
+		val errors = result.eResource.errors
+		errors.assertEmpty
+		Assert.assertTrue(result instanceof Machine)
+		result.assertMachine("testNoVisible", null)
+	}
+	
+	@Test
+	def void testTypedVariableWithVisibleRecordsAgent() {
+		val testInput = '''
+			machine testWithVisible
+			variable x : N = 0 visible C1
+			end
+		'''
+		val result = testInput.parse
+		Assert.assertNotNull(result)
+		val errors = result.eResource.errors
+		errors.assertEmpty
+		Assert.assertTrue(result instanceof Machine)
+		result.assertMachine("testWithVisible", null)
+		val variable = result.orderedChildren.get(0) as AgentTypedVariable
+		Assert.assertEquals("x", variable.name)
+		Assert.assertEquals(1, variable.agents.size)
+		Assert.assertEquals("C1", variable.agents.get(0))
 	}
 }

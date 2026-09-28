@@ -132,11 +132,11 @@ XMultipleInvariant returns emachine::Invariant:
 	name=XLABEL predicate=XFormula	
 ;
 
-XIndividualInvariant returns emachine::Invariant:
-	{emachine::Invariant}
+XIndividualInvariant returns eagent::CompleteIgnoranceInvariant:
+	{eagent::CompleteIgnoranceInvariant}
 	(comment=STRING)?
-	(theorem?='theorem' | 'invariant')
-	name=XLABEL predicate=XFormula	
+	'complete' 'ignorance'
+	name=XLABEL ('if' condition=XFormula 'then')? 'knows' 'only' fact=XFormula 'about' variables+=ID+ ('visible' agents+=ID+)?	
 ;
 
 terminal XLABEL returns ecore::EString:

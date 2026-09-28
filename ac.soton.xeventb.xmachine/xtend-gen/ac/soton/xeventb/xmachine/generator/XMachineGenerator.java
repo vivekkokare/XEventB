@@ -15,6 +15,7 @@ package ac.soton.xeventb.xmachine.generator;
 
 import ac.soton.emf.translator.TranslatorFactory;
 import ac.soton.eventb.emf.agent.AgentTypedVariable;
+import ac.soton.eventb.emf.agent.CompleteIgnoranceInvariant;
 import ac.soton.eventb.emf.containment.Containment;
 import ac.soton.eventb.emf.core.extension.coreextension.TypedVariable;
 import ac.soton.eventb.emf.diagrams.DiagramOwner;
@@ -211,91 +212,161 @@ public class XMachineGenerator extends AbstractGenerator {
     Object _eGet = copy.eGet(
       CorePackage.Literals.EVENT_BELEMENT__ORDERED_CHILDREN);
     final EList<EventBElement> orderedChildren = ((EList<EventBElement>) _eGet);
+    final ArrayList<CompleteIgnoranceInvariant> completeIgnoranceInvariants = new ArrayList<CompleteIgnoranceInvariant>();
     for (final EventBElement child : orderedChildren) {
-      if ((child instanceof Event)) {
-        boolean _equals = ((Event)child).getName().equals("INITIALISATION");
-        if (_equals) {
-          EList<Action> _actions = ((Event)child).getActions();
-          for (final Action action : _actions) {
-            boolean _equals_1 = action.getName().equals("shadow_update");
-            if (_equals_1) {
-              String assignment = action.getAction();
-              final String[] split_string = assignment.split(":∣");
-              String lhs = split_string[0];
-              String rhs = split_string[1];
-              lhs = ((lhs + ", ") + shadowVariable);
-              final ArrayList<String> shadowHiddenPrimedVariable = new ArrayList<String>();
-              for (final String hiddenVariable : hiddenVariables) {
-                shadowHiddenPrimedVariable.add((("shadow_" + hiddenVariable) + "\'"));
-              }
-              assignment = (((lhs + " :∣ ") + rhs) + " ∧ ");
-              String shadowUpdate = "";
-              String _shadowUpdate = shadowUpdate;
-              String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(shadowHiddenPrimedVariable.toArray())), " ↦ ");
-              shadowUpdate = (_shadowUpdate + _join);
-              String _shadowUpdate_1 = shadowUpdate;
-              shadowUpdate = (_shadowUpdate_1 + " ∣ ");
-              for (final String hiddenVariable_1 : hiddenVariables) {
-                rhs = rhs.replaceAll(hiddenVariable_1, ("shadow_" + hiddenVariable_1));
-              }
-              String _shadowUpdate_2 = shadowUpdate;
-              shadowUpdate = (_shadowUpdate_2 + rhs);
-              String _assignment = assignment;
-              assignment = (_assignment + (((shadowVariable + "\' = {") + shadowUpdate) + "}"));
-              action.setAction(assignment);
-            }
-          }
-        } else {
-          EList<Action> _actions_1 = ((Event)child).getActions();
-          for (final Action action_1 : _actions_1) {
-            boolean _equals_2 = action_1.getName().equals("shadow_update");
-            if (_equals_2) {
-              String assignment_1 = action_1.getAction();
-              final String[] split_string_1 = assignment_1.split(":∣");
-              String lhs_1 = split_string_1[0];
-              String rhs_1 = split_string_1[1];
-              lhs_1 = ((lhs_1 + ", ") + shadowVariable);
-              String shadowUpdate_1 = "";
-              final ArrayList<String> shadowHiddenVariable = new ArrayList<String>();
-              final ArrayList<String> shadowHiddenPrimedVariable_1 = new ArrayList<String>();
-              for (final String hiddenVariable_2 : hiddenVariables) {
-                {
-                  shadowHiddenVariable.add(("shadow_" + hiddenVariable_2));
-                  shadowHiddenPrimedVariable_1.add((("shadow_" + hiddenVariable_2) + "\'"));
+      if ((child instanceof CompleteIgnoranceInvariant)) {
+        completeIgnoranceInvariants.add(((CompleteIgnoranceInvariant)child));
+      } else {
+        if ((child instanceof Event)) {
+          boolean _equals = ((Event)child).getName().equals("INITIALISATION");
+          if (_equals) {
+            EList<Action> _actions = ((Event)child).getActions();
+            for (final Action action : _actions) {
+              boolean _equals_1 = action.getName().equals("shadow_update");
+              if (_equals_1) {
+                String assignment = action.getAction();
+                final String[] split_string = assignment.split(":∣");
+                String lhs = split_string[0];
+                String rhs = split_string[1];
+                lhs = ((lhs + ", ") + shadowVariable);
+                final ArrayList<String> shadowHiddenPrimedVariable = new ArrayList<String>();
+                for (final String hiddenVariable : hiddenVariables) {
+                  shadowHiddenPrimedVariable.add((("shadow_" + hiddenVariable) + "\'"));
                 }
+                assignment = (((lhs + " :∣ ") + rhs) + " ∧ ");
+                String shadowUpdate = "";
+                String _shadowUpdate = shadowUpdate;
+                String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(shadowHiddenPrimedVariable.toArray())), " ↦ ");
+                shadowUpdate = (_shadowUpdate + _join);
+                String _shadowUpdate_1 = shadowUpdate;
+                shadowUpdate = (_shadowUpdate_1 + " ∣ ");
+                for (final String hiddenVariable_1 : hiddenVariables) {
+                  rhs = rhs.replaceAll(hiddenVariable_1, ("shadow_" + hiddenVariable_1));
+                }
+                String _shadowUpdate_2 = shadowUpdate;
+                shadowUpdate = (_shadowUpdate_2 + rhs);
+                String _assignment = assignment;
+                assignment = (_assignment + (((shadowVariable + "\' = {") + shadowUpdate) + "}"));
+                action.setAction(assignment);
               }
-              assignment_1 = (((lhs_1 + " :∣ ") + rhs_1) + " ∧ ");
-              String _shadowUpdate_3 = shadowUpdate_1;
-              String _join_1 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(shadowHiddenPrimedVariable_1.toArray())), " ↦ ");
-              shadowUpdate_1 = (_shadowUpdate_3 + _join_1);
-              String _shadowUpdate_4 = shadowUpdate_1;
-              shadowUpdate_1 = (_shadowUpdate_4 + " ∣ ");
-              String _shadowUpdate_5 = shadowUpdate_1;
-              shadowUpdate_1 = (_shadowUpdate_5 + "∃ ");
-              String _shadowUpdate_6 = shadowUpdate_1;
-              String _join_2 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(shadowHiddenVariable.toArray())), ", ");
-              shadowUpdate_1 = (_shadowUpdate_6 + _join_2);
-              String _shadowUpdate_7 = shadowUpdate_1;
-              shadowUpdate_1 = (_shadowUpdate_7 + " · ");
-              String _shadowUpdate_8 = shadowUpdate_1;
-              String _join_3 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(shadowHiddenVariable.toArray())), " ↦ ");
-              shadowUpdate_1 = (_shadowUpdate_8 + _join_3);
-              String _shadowUpdate_9 = shadowUpdate_1;
-              shadowUpdate_1 = (_shadowUpdate_9 + " ∈ ");
-              String _shadowUpdate_10 = shadowUpdate_1;
-              shadowUpdate_1 = (_shadowUpdate_10 + shadowVariable);
-              String _shadowUpdate_11 = shadowUpdate_1;
-              shadowUpdate_1 = (_shadowUpdate_11 + " ∧ ");
-              for (final String hiddenVariable_3 : hiddenVariables) {
-                rhs_1 = rhs_1.replaceAll(hiddenVariable_3, ("shadow_" + hiddenVariable_3));
+            }
+          } else {
+            EList<Action> _actions_1 = ((Event)child).getActions();
+            for (final Action action_1 : _actions_1) {
+              boolean _equals_2 = action_1.getName().equals("shadow_update");
+              if (_equals_2) {
+                String assignment_1 = action_1.getAction();
+                final String[] split_string_1 = assignment_1.split(":∣");
+                String lhs_1 = split_string_1[0];
+                String rhs_1 = split_string_1[1];
+                lhs_1 = ((lhs_1 + ", ") + shadowVariable);
+                String shadowUpdate_1 = "";
+                final ArrayList<String> shadowHiddenVariable = new ArrayList<String>();
+                final ArrayList<String> shadowHiddenPrimedVariable_1 = new ArrayList<String>();
+                for (final String hiddenVariable_2 : hiddenVariables) {
+                  {
+                    shadowHiddenVariable.add(("shadow_" + hiddenVariable_2));
+                    shadowHiddenPrimedVariable_1.add((("shadow_" + hiddenVariable_2) + "\'"));
+                  }
+                }
+                assignment_1 = (((lhs_1 + " :∣ ") + rhs_1) + " ∧ ");
+                String _shadowUpdate_3 = shadowUpdate_1;
+                String _join_1 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(shadowHiddenPrimedVariable_1.toArray())), " ↦ ");
+                shadowUpdate_1 = (_shadowUpdate_3 + _join_1);
+                String _shadowUpdate_4 = shadowUpdate_1;
+                shadowUpdate_1 = (_shadowUpdate_4 + " ∣ ");
+                String _shadowUpdate_5 = shadowUpdate_1;
+                shadowUpdate_1 = (_shadowUpdate_5 + "∃ ");
+                String _shadowUpdate_6 = shadowUpdate_1;
+                String _join_2 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(shadowHiddenVariable.toArray())), ", ");
+                shadowUpdate_1 = (_shadowUpdate_6 + _join_2);
+                String _shadowUpdate_7 = shadowUpdate_1;
+                shadowUpdate_1 = (_shadowUpdate_7 + " · ");
+                String _shadowUpdate_8 = shadowUpdate_1;
+                String _join_3 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(shadowHiddenVariable.toArray())), " ↦ ");
+                shadowUpdate_1 = (_shadowUpdate_8 + _join_3);
+                String _shadowUpdate_9 = shadowUpdate_1;
+                shadowUpdate_1 = (_shadowUpdate_9 + " ∈ ");
+                String _shadowUpdate_10 = shadowUpdate_1;
+                shadowUpdate_1 = (_shadowUpdate_10 + shadowVariable);
+                String _shadowUpdate_11 = shadowUpdate_1;
+                shadowUpdate_1 = (_shadowUpdate_11 + " ∧ ");
+                for (final String hiddenVariable_3 : hiddenVariables) {
+                  rhs_1 = rhs_1.replaceAll(hiddenVariable_3, ("shadow_" + hiddenVariable_3));
+                }
+                String _shadowUpdate_12 = shadowUpdate_1;
+                shadowUpdate_1 = (_shadowUpdate_12 + rhs_1);
+                String _assignment_1 = assignment_1;
+                assignment_1 = (_assignment_1 + (((shadowVariable + "\' = {") + shadowUpdate_1) + "}"));
+                action_1.setAction(assignment_1);
               }
-              String _shadowUpdate_12 = shadowUpdate_1;
-              shadowUpdate_1 = (_shadowUpdate_12 + rhs_1);
-              String _assignment_1 = assignment_1;
-              assignment_1 = (_assignment_1 + (((shadowVariable + "\' = {") + shadowUpdate_1) + "}"));
-              action_1.setAction(assignment_1);
             }
           }
+        }
+      }
+    }
+    for (final CompleteIgnoranceInvariant child_1 : completeIgnoranceInvariants) {
+      {
+        final EList<String> visible_agents = child_1.getAgents();
+        boolean _contains = visible_agents.contains(agent);
+        if (_contains) {
+          final ArrayList<String> shadowHiddenVariable_1 = new ArrayList<String>();
+          final EList<String> variables = child_1.getVariables();
+          for (final String hiddenVariable_4 : variables) {
+            shadowHiddenVariable_1.add(("shadow_" + hiddenVariable_4));
+          }
+          String _condition = child_1.getCondition();
+          String _plus = ("(" + _condition);
+          String predicate = (_plus + ")");
+          String _predicate = predicate;
+          predicate = (_predicate + " ⇒ ");
+          String _predicate_1 = predicate;
+          predicate = (_predicate_1 + "(");
+          String _predicate_2 = predicate;
+          String _join_4 = IterableExtensions.join(shadowHiddenVariable_1, ", ");
+          String _plus_1 = ("∀" + _join_4);
+          predicate = (_predicate_2 + _plus_1);
+          String _predicate_3 = predicate;
+          predicate = (_predicate_3 + " · ");
+          String fact = child_1.getFact();
+          for (final String hiddenVariable_5 : variables) {
+            fact = fact.replaceAll(hiddenVariable_5, ("shadow_" + hiddenVariable_5));
+          }
+          String _predicate_4 = predicate;
+          predicate = (_predicate_4 + fact);
+          String _predicate_5 = predicate;
+          predicate = (_predicate_5 + " ⇒ ");
+          String _predicate_6 = predicate;
+          predicate = (_predicate_6 + "(");
+          String _predicate_7 = predicate;
+          predicate = (_predicate_7 + "∃ ");
+          String _predicate_8 = predicate;
+          String _join_5 = IterableExtensions.join(hiddenVariables, ", ");
+          predicate = (_predicate_8 + _join_5);
+          String _predicate_9 = predicate;
+          predicate = (_predicate_9 + " · ");
+          String _predicate_10 = predicate;
+          String _join_6 = IterableExtensions.join(hiddenVariables, " ↦ ");
+          predicate = (_predicate_10 + _join_6);
+          String _predicate_11 = predicate;
+          predicate = (_predicate_11 + " ∈ ");
+          String _predicate_12 = predicate;
+          predicate = (_predicate_12 + shadowVariable);
+          String _predicate_13 = predicate;
+          predicate = (_predicate_13 + " ∧ ");
+          String _predicate_14 = predicate;
+          String _join_7 = IterableExtensions.join(variables, " ↦ ");
+          predicate = (_predicate_14 + _join_7);
+          String _predicate_15 = predicate;
+          predicate = (_predicate_15 + " = ");
+          String _predicate_16 = predicate;
+          String _join_8 = IterableExtensions.join(shadowHiddenVariable_1, " ↦ ");
+          predicate = (_predicate_16 + _join_8);
+          String _predicate_17 = predicate;
+          predicate = (_predicate_17 + ")");
+          String _predicate_18 = predicate;
+          predicate = (_predicate_18 + ")");
+          EventBEMFUtils.createInvariant(editingDomain, copy, child_1.getName(), predicate, false);
         }
       }
     }

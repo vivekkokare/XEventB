@@ -5,6 +5,7 @@ package ac.soton.xeventb.xmachine.serializer;
 
 import ac.soton.eventb.emf.agent.AgentPackage;
 import ac.soton.eventb.emf.agent.AgentTypedVariable;
+import ac.soton.eventb.emf.agent.CompleteIgnoranceInvariant;
 import ac.soton.eventb.emf.containment.Containment;
 import ac.soton.eventb.emf.containment.ContainmentPackage;
 import ac.soton.eventb.emf.inclusion.EventSynchronisation;
@@ -52,6 +53,9 @@ public class XMachineSemanticSequencer extends AbstractDelegatingSemanticSequenc
 			case AgentPackage.AGENT_TYPED_VARIABLE:
 				sequence_XIndividualVariable(context, (AgentTypedVariable) semanticObject); 
 				return; 
+			case AgentPackage.COMPLETE_IGNORANCE_INVARIANT:
+				sequence_XIndividualInvariant(context, (CompleteIgnoranceInvariant) semanticObject); 
+				return; 
 			}
 		else if (epackage == ContainmentPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
@@ -80,15 +84,8 @@ public class XMachineSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				sequence_XGuard(context, (Guard) semanticObject); 
 				return; 
 			case MachinePackage.INVARIANT:
-				if (rule == grammarAccess.getXIndividualInvariantRule()) {
-					sequence_XIndividualInvariant(context, (Invariant) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getXMultipleInvariantRule()) {
-					sequence_XMultipleInvariant(context, (Invariant) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_XMultipleInvariant(context, (Invariant) semanticObject); 
+				return; 
 			case MachinePackage.MACHINE:
 				sequence_Machine(context, (Machine) semanticObject); 
 				return; 
@@ -284,13 +281,20 @@ public class XMachineSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     XIndividualInvariant returns Invariant
+	 *     XIndividualInvariant returns CompleteIgnoranceInvariant
 	 *
 	 * Constraint:
-	 *     (comment=STRING? theorem?='theorem'? name=XLABEL predicate=XFormula)
+	 *     (
+	 *         comment=STRING? 
+	 *         name=XLABEL 
+	 *         condition=XFormula? 
+	 *         fact=XFormula 
+	 *         variables+=ID+ 
+	 *         agents+=ID*
+	 *     )
 	 * </pre>
 	 */
-	protected void sequence_XIndividualInvariant(ISerializationContext context, Invariant semanticObject) {
+	protected void sequence_XIndividualInvariant(ISerializationContext context, CompleteIgnoranceInvariant semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
